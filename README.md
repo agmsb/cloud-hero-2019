@@ -9,9 +9,10 @@ Clone this repository
 Run 
 ``` gcloud init```
 
-Update options.sh with proper variables
+Update options.sh with qwiklabs variables
 
 Run 
 ```chmod +x hero.sh```
 
-Run hero.sh
+Run 
+```./hero.sh```
