@@ -7,7 +7,7 @@ NOTE: This only supports Tasks 1-7 for now.
 Clone this repository
 
 Run 
-``` gcloud init```
+``` gcloud init``` and ```gcloud config set project <qwiklabs-project-id>```
 
 Update options.sh with qwiklabs variables
 
