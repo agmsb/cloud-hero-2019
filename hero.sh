@@ -87,11 +87,11 @@ cat << EOM
 
 Currently running: 
 
-kubectl expose hello-hero --type=LoadBalancer --port=80
+kubectl expose deploy hello-hero --type=LoadBalancer --port=80
 
 EOM
 
-kubectl expose hello-hero --type=LoadBalancer --port=80
+kubectl expose deploy hello-hero --type=LoadBalancer --port=80
 
 sleep 2
 
