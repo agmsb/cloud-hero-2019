@@ -81,6 +81,7 @@ sleep 2
 printf "\n Task 6: Create CSR"
 
 gcloud source repos create cloudhero-challenge
+cd ..
 git clone https://github.com/GoogleCloudPlatform/getting-started-python.git
 cd getting-started-python
 git config --global user.email $USER_ID@qwiklabs.net
