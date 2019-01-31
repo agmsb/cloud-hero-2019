@@ -22,17 +22,6 @@ sleep 2
 
 printf "\n Task 1: Creating GCS Bucket  \n"
 
-cat << EOM
-
-Currently Running:
-
-gsutil mb gs://cloud-hero-$PROJECT_ID
-gsutil acl ch -u AllUsers:R gs://$PROJECT_ID
-touch test.txt
-gsutil cp test.txt gs://cloud-hero-$PROJECT_ID
-
-EOM
-
 gsutil mb gs://cloud-hero-$PROJECT_ID
 gsutil acl ch -u AllUsers:R gs://$PROJECT_ID
 touch test.txt
@@ -43,25 +32,9 @@ sleep 3
 
 printf "\n Task 2: Creating GKE Cluster  \n"
 
-cat << EOM
-
-Currently running:
-
-gcloud container clusters create cloudhero-web --zone us-central1-a --scopes=https://www.googleapis.com/auth/cloud-platform
-
-EOM
-
 gcloud container clusters create cloudhero-web --zone us-central1-a --scopes=https://www.googleapis.com/auth/cloud-platform
 
 printf "\n Task 3: Fetching GKE Credentials  \n"
-
-cat << EOM
-
-Currently running:
-
-gcloud container clusters get-credentials cloudhero-web --zone us-central1-a --project $PROJECT_ID
-
-EOM
 
 gcloud container clusters get-credentials cloudhero-web --zone us-central1-a --project $PROJECT_ID
 
@@ -69,27 +42,11 @@ sleep 3
 
 printf "\n Task 3: Deploying hello-hero deployment"
 
-cat << EOM
-
-Currently running:
-
-kubectl run hello-hero --image=nginx --replicas=3 
-
-EOM
-
 kubectl run hello-hero --image=nginx --replicas=3 
 
 sleep 3
 
 printf "\n Task 3: Exposing hello-hero deployment"
-
-cat << EOM
-
-Currently running: 
-
-kubectl expose deploy hello-hero --type=LoadBalancer --port=80
-
-EOM
 
 kubectl expose deploy hello-hero --type=LoadBalancer --port=80
 
@@ -97,29 +54,9 @@ sleep 2
 
 printf "\n Task 4: Creating Cloud PubSub topic"
 
-cat << EOM
-
-Currently running:
-
-gcloud pubsub topics create cloud-hero-topic
-
-EOM
-
 gcloud pubsub topics create cloud-hero-topic
 
 printf "\n Task 5: Downloading GCF files from GCS"
-
-cat << EOM
-
-Currently running:
-
-mkdir gcf
-cd gcf
-wget https://storage.googleapis.com/cloudhero-content/pubSubListener/index.js
-wget https://storage.googleapis.com/cloudhero-content/pubSubListener/package.json
-
-EOM
-
 
 mkdir gcf
 cd gcf
@@ -130,46 +67,17 @@ sleep 2
 
 printf "\n Task 5: Edit index.js"
 
-cat <<EOM
-
-Currently running:
-
-sed -i 's,www.example.com,us-central1-cloudhero-test.cloudfunctions.net/cloudFunctionChallenge_verifyCallback,g' index.js
-
-EOM
-
 sed -i 's,www.example.com,us-central1-cloudhero-test.cloudfunctions.net/cloudFunctionChallenge_verifyCallback,g' index.js
 
 sleep 2
 
 printf "\n Task 5: Deploy Cloud Function"
 
-
-cat << EOM
-
-Currently running:
-
-sed -i 's,www.example.com,us-central1-cloudhero-test.cloudfunctions.net/cloudFunctionChallenge_verifyCallback,g' index.js
-
-EOM
-
 gcloud functions deploy pubSubListener --runtime nodejs6 --trigger-topic cloud-hero-topic --region  us-central1
 
 sleep 2 
 
 printf "\n Task 6: Create CSR"
-
-cat << EOM
-
-Currently running:
-
-gcloud source repos create cloudhero-challenge
-git clone https://github.com/GoogleCloudPlatform/getting-started-python.git
-cd getting-started-python.git
-git config --global user.email $USER_ID@qwiklabs.net
-git config --global user.name $USER_ID
-
-EOM
 
 gcloud source repos create cloudhero-challenge
 git clone https://github.com/GoogleCloudPlatform/getting-started-python.git
@@ -179,32 +87,11 @@ git config --global user.name $USER_ID
 
 printf "\n Task 6: Add CSR as remote"
 
-cat << EOM
-
-Currently running: 
-
-git remote add google \
-https://source.developers.google.com/p/$PROJECT_ID/r/cloudhero-challenge
-
-git push --all google
-
-EOM
-
 git remote add google \
 https://source.developers.google.com/p/$PROJECT_ID/r/cloudhero-challenge
 git push --all google
 
 printf "\n Task 7: Creating automated build in GCR"
-
-cat << EOM
-
-Currently running:
-
-cd optional-kubernetes-engine
-sed -i s,CLOUD_STORAGE_BUCKET\s=\s'your-project-id',CLOUD_STORAGE_BUCKET\s=\sgs://cloud-hero-$PROJECT_ID,g config.py
-sed -i s,PROJECT_ID\s=\s'your-project-id',PROJECT_ID\s=\s$PROJECT_ID,g config.py
-
-EOM 
 
 cd optional-kubernetes-engine
 sed -i s,CLOUD_STORAGE_BUCKET\s=\s'your-project-id',CLOUD_STORAGE_BUCKET\s=\sgs://cloud-hero-$PROJECT_ID,g config.py
