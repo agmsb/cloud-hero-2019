@@ -1,6 +1,6 @@
 # cloud-hero-2019
 
-NOTE: This only supports Tasks 1-7 for now.
+NOTE: This only automates Tasks 1-6, for now.
 
 ## Usage
 
