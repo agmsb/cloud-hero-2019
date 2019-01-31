@@ -23,6 +23,7 @@ sleep 2
 printf "\n Task 1: Creating GCS Bucket  \n"
 
 gsutil mb gs://cloud-hero-$PROJECT_ID
+sleep 15
 gsutil acl ch -u AllUsers:R gs://$PROJECT_ID
 touch test.txt
 sleep 10
