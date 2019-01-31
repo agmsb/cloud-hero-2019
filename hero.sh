@@ -36,6 +36,7 @@ EOM
 gsutil mb gs://cloud-hero-$PROJECT_ID
 gsutil acl ch -u AllUsers:R gs://$PROJECT_ID
 touch test.txt
+sleep 10
 gsutil cp test.txt gs://cloud-hero-$PROJECT_ID
 
 sleep 3
